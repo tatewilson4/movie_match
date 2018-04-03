@@ -7,7 +7,7 @@ app.controller('MainController',['$http', function($http) {
 
     this.baseURL = 'http://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
-    this.query = 's=';
+    this.query = 't=';
     this.movieTitle = '';
     this.searchURL = this.baseURL + this.apikey + '&' + this.query;
 
@@ -19,7 +19,7 @@ app.controller('MainController',['$http', function($http) {
             method: 'GET',
             url : this.searchURL + this.movieTitle
        }).then( response => {
-            this.movies = response.data.Search;
+            this.movies = [response.data];
             console.log(response.data);
         }, error => {
             console.log(error);
