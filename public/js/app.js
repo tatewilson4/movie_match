@@ -43,4 +43,20 @@ app.controller('MainController',['$http', function($http) {
         });
     }
 
+    this.loginUser = function(){
+        $http({
+            method: 'POST',
+            url: '/session',
+            data: {
+                username: this.username,
+                password: this.password
+            }
+        }).then(response => {
+            // this.session = [response.data];
+            console.log(response);
+        },error => {
+            console.log('error');
+        });
+    }
+
 }]);
