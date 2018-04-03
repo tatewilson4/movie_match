@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body ng-controller="MainController as ctrl">
-    <a href="/users/new">Create New User</a>
-    <a href="/sessions/new">Log In</a>
     <div class="dropBar">
-        <form ng-submit="ctrl.createdUser()">
-            <input type="text" ng-model="ctrl.username" placeholder="username">
-            <input type="text" ng-model="ctrl.password" placeholder="password">
-            <input type="submit" value="Create New User">
-        </form>
-        <!-- <form action="/movies" method="POST">
+            
+            <form ng-submit="ctrl.createdUser()">
+                <input type="text" ng-model="ctrl.username" placeholder="username">
+                <input type="text" ng-model="ctrl.password" placeholder="password">
+                <input type="submit" value="Create New User">
+            </form>
+            <form ng-submit="ctrl.loginUser()">
+                <input type="text" ng-model="ctrl.username" placeholder="username">
+                <input type="text" ng-model="ctrl.password" placeholder="password">
+                <input type="submit" value="Log In">
+            </form>
+            <!-- <form action="/movies" method="POST">
             Login
             <input type="text" name="username" placeholder="username" />
             <input type="password" name="password" />
