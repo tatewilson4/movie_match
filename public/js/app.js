@@ -28,4 +28,19 @@ app.controller('MainController',['$http', function($http) {
         })
     }
 
+    this.createdUser = function(){
+        $http({
+            method: 'POST',
+            url: '/users',
+            data: {
+                username: this.username,
+                password: this.password
+            }
+        }).then(function(response){
+            console.log(response);
+        }, function(){
+            console.log('error');
+        });
+    }
+
 }]);
