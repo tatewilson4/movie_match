@@ -11,18 +11,17 @@
     <a href="/users/new">Create New User</a>
     <a href="/sessions/new">Log In</a>
     <div class="dropBar">
-        <form action="/movies" method="POST">
-            Create New User
-            <input type="text" name="username" placeholder="username" />
-            <input type="password" name="password" />
-            <input type="submit" value="Create User">
+        <form ng-submit="ctrl.createdUser()">
+            <input type="text" ng-model="ctrl.username" placeholder="username">
+            <input type="text" ng-model="ctrl.password" placeholder="password">
+            <input type="submit" value="Create New User">
         </form>
-        <form action="/movies" method="POST">
+        <!-- <form action="/movies" method="POST">
             Login
             <input type="text" name="username" placeholder="username" />
             <input type="password" name="password" />
             <input type="submit" value="Log In">
-        </form>
+        </form> -->
     </div>
     <div class="container">
         <h1>Movie-Match</h1>
