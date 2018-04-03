@@ -15,10 +15,10 @@ app.controller('MainController',['$http', function($http) {
 
     // Get Movies
     this.getMovies = ()=>{
-        $http({
+     $http({
             method: 'GET',
             url : this.searchURL + this.movieTitle
-        }).then( response => {
+       }).then( response => {
             this.movies = response.data.Search;
             console.log(response.data);
         }, error => {
