@@ -26,11 +26,22 @@ app.use('/users' , userController);
 const sessionController = require('./controllers/sessions.js');
 app.use('/session' , sessionController);
 
-app.get('/' , (req, res) => {
-    res.render('index.html' , {
-        currentUser: req.session.currentUser
-    });
+app.get('/app', function(req, res){
+    if(req.session.currentUser){
+        res.json(req.session.currentUser);
+    } else {
+        res.status(401).json({ //status 401 is specifically for when the user needs to log in
+            status:401,
+            message:'not logged in'
+        });
+    }
 });
+
+// app.get('/' , (req, res) => {
+//     res.render('index.html' , {
+//         currentUser: req.session.currentUser
+//     });
+// });
 
 const User = require('./models/users.js');
 
