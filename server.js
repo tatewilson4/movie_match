@@ -20,10 +20,10 @@ const moviesController = require('./controllers/movies.js');
 app.use('/movies', moviesController);
 //users
 const userController = require('./controllers/users.js');
-app.use('/users' , usersController);
+app.use('/movies' , usersController);
 //sessions
 const sessionController = require('./controllers/sessions.js');
-app.use('/session' , sessionController);
+app.use('/movies' , sessionController);
 
 app.get('/' , (req, res) => {
     res.render('index.ejs' , {
