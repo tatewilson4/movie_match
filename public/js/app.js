@@ -38,6 +38,7 @@ app.controller('MainController',['$http', function($http) {
             }
         }).then(response => {
             this.users = [response.data];
+            console.log(response);
         }, error => {
             console.log('error');
         });

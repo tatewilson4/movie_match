@@ -4,17 +4,18 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-const methodOverride = require('method-override');
+
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
 //session middleware
+app.use(express.urlencoded({extended:false}));
 app.use(session({
     secret: "feedmeseymour",
     resave: false,
     saveUninitialized: false
 }));
-app.use(methodOverride('_method'));
+
 
 const moviesController = require('./controllers/movies.js');
 app.use('/movies', moviesController);
