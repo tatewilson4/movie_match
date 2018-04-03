@@ -20,13 +20,13 @@ const moviesController = require('./controllers/movies.js');
 app.use('/movies', moviesController);
 //users
 const userController = require('./controllers/users.js');
-app.use('/movies' , moviesController);
+app.use('/users' , userController);
 //sessions
 const sessionController = require('./controllers/sessions.js');
-app.use('/movies' , moviesController);
+app.use('/session' , sessionController);
 
 app.get('/' , (req, res) => {
-    res.render('index.ejs' , {
+    res.render('index.html' , {
         currentUser: req.session.currentUser
     });
 });
