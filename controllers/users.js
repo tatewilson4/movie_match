@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/users.js');
 const bycrypt = require('bcrypt');
 
-router.get('/' , (req, res) => {
+router.get('/new' , (req, res) => {
     res.render('users/new.html')
 })
 
