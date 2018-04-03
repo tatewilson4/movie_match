@@ -26,7 +26,7 @@ const sessionController = require('./controllers/sessions.js');
 app.use('/session' , sessionController);
 
 app.get('/' , (req, res) => {
-    res.render('index.ejs' , {
+    res.render('index.html' , {
         currentUser: req.session.currentUser
     });
 });
