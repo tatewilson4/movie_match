@@ -21,7 +21,7 @@ router.delete('/:id' , (req, res) => {
 });
 
 router.put('/:id' , (req, res) => {
-    Movies.findByAndUpdate(req.params.id, {new:true}, (err, updatedMovie) => {
+    Movies.findByAndUpdate(req.params.id, req.body, {new:true}, (err, updatedMovie) => {
         res.json(updatedMovie);
     });
 });
