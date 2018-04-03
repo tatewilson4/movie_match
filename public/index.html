@@ -8,25 +8,28 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body ng-controller="MainController as ctrl">
-    <div class="dropBar">
-            
+    <div class="navBar">
+
             <form ng-submit="ctrl.createdUser()">
                 <input type="text" ng-model="ctrl.username" placeholder="username">
                 <input type="text" ng-model="ctrl.password" placeholder="password">
                 <input type="submit" value="Create New User">
             </form>
-            <form ng-submit="ctrl.loginUser()">
+            
+            </div>
+
+            <!-- <form ng-submit="ctrl.loginUser()">
                 <input type="text" ng-model="ctrl.username" placeholder="username">
                 <input type="text" ng-model="ctrl.password" placeholder="password">
                 <input type="submit" value="Log In">
-            </form>
+            </form> -->
             <!-- <form action="/movies" method="POST">
             Login
             <input type="text" name="username" placeholder="username" />
             <input type="password" name="password" />
             <input type="submit" value="Log In">
         </form> -->
-    </div>
+
     <div class="container">
         <h1>Movie-Match</h1>
         <form name="getMovies" ng-submit="ctrl.getMovies()">
