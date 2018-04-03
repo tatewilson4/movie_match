@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html ng-app="CreateApp">
+<head>
     <meta charset="utf-8">
-    <title>Kingsman</title>
-  </head>
-  <body>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="../js/app.js" charset="utf-8"></script>
+</head>
+<body ng-controller="MainController as ctrl">
     <form action="/users" method="POST">
-      <input type="text" name="username" placeholder="username"/>
-      <input type="password" name="password" />
-      <input type="submit" value="Create User" />
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password" name="password" />
+        <input type="submit" value="Create User" />
     </form>
-  </body>
+</body>
 </html>
