@@ -36,9 +36,9 @@ app.controller('MainController',['$http', function($http) {
                 username: this.username,
                 password: this.password
             }
-        }).then(function(response){
-            console.log(response);
-        }, function(){
+        }).then(response => {
+            this.users = [response.data];
+        }, error => {
             console.log('error');
         });
     }
