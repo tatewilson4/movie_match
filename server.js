@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(session({
     secret: "feedmeseymour",
     resave: false,
-    saveUninitialized
+    saveUninitialized: false
 }));
 app.use(methodOverride('_method'));
 
