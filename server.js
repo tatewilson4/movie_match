@@ -37,11 +37,6 @@ app.get('/app', function(req, res){
     }
 });
 
-// app.get('/' , (req, res) => {
-//     res.render('index.html' , {
-//         currentUser: req.session.currentUser
-//     });
-// });
 
 const User = require('./models/users.js');
 
