@@ -10,27 +10,25 @@
 </head>
 <body ng-controller="MainController as ctrl">
     <div class="navBar">
-       <h2>Create User</h2>
-       <form ng-submit="auth.createUser()">
-           <input type="text" ng-model="auth.username" />
-           <input type="password" ng-model="auth.password" />
-           <input type="submit" value="Create User">
-       </form>
-       <h2>Log In</h2>
-       <form ng-submit="auth.logIn()">
-           <input type="text" ng-model="auth.username" />
-           <input type="password" ng-model="auth.password" />
-           <input type="submit" value="Log In">
-       </form>
-   </div>
-
-    <div class="header">
+        <h2>Create User</h2>
+        <form ng-submit="auth.createUser()">
+            <input type="text" ng-model="auth.username" />
+            <input type="password" ng-model="auth.password" />
+            <input type="submit" value="Create User">
+        </form>
+        <h2>Log In</h2>
+        <form ng-submit="auth.logIn()">
+            <input type="text" ng-model="auth.username" />
+            <input type="password" ng-model="auth.password" />
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+     <div class="header">
         <a id="navbar-logo" href="/">
         <img src="logo1.png" alt="MovieMatch"></a>
         <div class="watchlist">
             <a href="/">Your Watchlist</a>
         </div>
-    </div>
     <div class="container">
         <div class="box1">
             <h3>FIND SOMETHING TO WATCH:</h3>
