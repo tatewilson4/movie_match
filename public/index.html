@@ -12,6 +12,7 @@
 
     <!-- Navbar -->
     <div class="navBar">
+
         <!-- Create User -->
           <a href="#" ng-click="(ctrl.indexOfCreateFormToShow === $index) ? ctrl.indexOfCreateFormToShow = null : ctrl.indexOfCreateFormToShow = $index">Create New User</a>
           <form ng-if="$index === ctrl.indexOfCreateFormToShow" ng-submit="ctrl.createUser()">
