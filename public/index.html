@@ -6,26 +6,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
     <link rel="stylesheet" href="/css/app.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body ng-controller="MainController as ctrl">
-    <div class="dropBar">
-    </div>
-    <div class="container">
-        <h1>Movie-Match</h1>
-        <form name="getMovies" ng-submit="ctrl.getMovies()">
-            <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
-            <button type="submit">FIND MOVIES</button>
+    <div class="navBar">
+        <h2>Create User</h2>
+        <form ng-submit="auth.createUser()">
+            <input type="text" ng-model="auth.username" />
+            <input type="password" ng-model="auth.password" />
+            <input type="submit" value="Create User">
         </form>
-        <div ng-repeat="movie in ctrl.movies">
+        <h2>Log In</h2>
+        <form ng-submit="auth.logIn()">
+            <input type="text" ng-model="auth.username" />
+            <input type="password" ng-model="auth.password" />
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+     <div class="header">
+        <a id="navbar-logo" href="/">
+        <img src="logo1.png" alt="MovieMatch"></a>
+        <div class="watchlist">
+            <a href="/">Your Watchlist</a>
+        </div>
+    <div class="container">
+        <div class="box1">
+            <h3>FIND SOMETHING TO WATCH:</h3>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+        </div>
+
+        <div class="main">
+            <div class="search">
+                <form name="getMovies" ng-submit="ctrl.getMovies()">
+                    <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
+                    <button type="submit">FIND MOVIES</button>
+                </form>
+            </div>
+        </div>
+        <div ng-repeat="movie in ctrl.movies" class="movies">
             <h2>{{ movie.Title }} {{ movie.Year }}</h2>
-            <img ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
+            <img id="poster" ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
             <h2>Starring: {{ movie.Actors }}</h2>
             <h3>Genre: {{ movie.Genre }}</h3>
             <h4>Imdb: {{ movie.Imdb }}</h4>
         </div>
-        <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-        <h3>FIND SOMETHING TO WATCH:</h3>
-        <h3></h3>
+
     </div>
 </body>
 </html>
