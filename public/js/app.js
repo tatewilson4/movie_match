@@ -15,10 +15,10 @@ app.controller('MainController',['$http', function($http) {
 
     // Get Movies
     this.getMovies = ()=>{
-     $http({
+        $http({
             method: 'GET',
             url : this.searchURL + this.movieTitle
-       }).then( response => {
+        }).then( response => {
             this.movies = [response.data];
             console.log(response.data);
         }, error => {
@@ -28,34 +28,32 @@ app.controller('MainController',['$http', function($http) {
         })
     }
 
-    this.createdUser = function(){
+    this.createUser = function(){
         $http({
-            method: 'POST',
+            method:'POST',
             url: '/users',
             data: {
                 username: this.username,
                 password: this.password
             }
-        }).then(response => {
-            this.users = [response.data];
+        }).then(function(response){
             console.log(response);
-        }, error => {
+        }, function(){
             console.log('error');
         });
     }
 
-    this.loginUser = function(){
+    this.logIn = function(){
         $http({
-            method: 'POST',
-            url: '/session',
+            method:'POST',
+            url: '/sessions',
             data: {
                 username: this.username,
                 password: this.password
             }
-        }).then(response => {
-            // this.session = [response.data];
+        }).then(function(response){
             console.log(response);
-        },error => {
+        }, function(){
             console.log('error');
         });
     }
