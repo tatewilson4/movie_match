@@ -24,13 +24,13 @@ const userController = require('./controllers/users.js');
 app.use('/users' , userController);
 //sessions
 const sessionController = require('./controllers/sessions.js');
-app.use('/session' , sessionController);
+app.use('/sessions' , sessionController);
 
-app.get('/app', function(req, res){
-    if(req.session.currentUser){
-        res.json(req.session.currentUser);
+app.get('/movies', function(req, res){
+    if(req.session.currentuser){
+        res.json(req.session.currentuser);
     } else {
-        res.status(401).json({ //status 401 is specifically for when the user needs to log in
+        res.status(401).json({
             status:401,
             message:'not logged in'
         });

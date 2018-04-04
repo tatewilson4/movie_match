@@ -2,6 +2,8 @@ const app = angular.module('Moviematch', []);
 
 app.controller('MainController',['$http', function($http) {
     this.appName = "Movie Match";
+    this.indexOfLogFormToShow = null;
+    this.indexOfCreateFormToShow = null;
 
     this.movies = [];
 
@@ -53,6 +55,18 @@ app.controller('MainController',['$http', function($http) {
             }
         }).then(function(response){
             console.log(response);
+        }, function(){
+            console.log('error');
+        });
+    }
+
+    this.goApp = function(){
+        const controller = this;
+        $http({
+            method:'Get',
+            url: '/movies'
+        }).then(function(response){
+            controller.loggedInUsername =response.data.username;
         }, function(){
             console.log('error');
         });
