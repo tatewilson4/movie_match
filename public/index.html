@@ -9,40 +9,47 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body ng-controller="MainController as ctrl">
-    <!-- Navbar -->
-    <div class="navBar">
-
-        <!-- Create User -->
-          <a href="#" ng-click="(ctrl.indexOfCreateFormToShow === $index) ? ctrl.indexOfCreateFormToShow = null : ctrl.indexOfCreateFormToShow = $index">Create New User</a>
-          <form ng-if="$index === ctrl.indexOfCreateFormToShow" ng-submit="ctrl.createUser()">
-              <input type="text" ng-model="ctrl.username" />
-              <input type="password" ng-model="ctrl.password" />
-              <input type="submit" value="Create User">
-          </form>
-
-          <!-- Log In -->
-          <a href="#" ng-click="(ctrl.indexOfLogFormToShow === $index) ? ctrl.indexOfLogFormToShow = null : ctrl.indexOfLogFormToShow = $index">Log In</a>
-          <form ng-if="$index === ctrl.indexOfLogFormToShow" ng-submit="ctrl.logIn()">
-              <input type="text" ng-model="ctrl.username" />
-              <input type="password" ng-model="ctrl.password" />
-              <!-- log in submit button - display welcom username -->
-              <input type="submit" value="Log In" ng-click="ctrl.getSignedInUser()">
-              <div ng-if="ctrl.loggedInUsername">
-                  Welcome, {{ ctrl.loggedInUsername }}
-                  <button>Logout</button>
-              </div>
-          </form>
-    </div>
-    <!-- Button for watchlist -->
-    <button ng-click="ctrl.toggleInfo()">Watchlist</button>
-
     <!-- Header -->
-     <div class="header">
+    <header>
         <a id="navbar-logo" href="/">
-        <img src="logo1.png" alt="MovieMatch"></a>
+            <img src="logo1.png" alt="MovieMatch"></a>
+            <!-- Navbar -->
+            <div class="create">
+                <div class="cb">
+                    <!-- Create User -->
+                    <a href="#" ng-click="(ctrl.indexOfCreateFormToShow === $index) ? ctrl.indexOfCreateFormToShow = null : ctrl.indexOfCreateFormToShow = $index">Create New User</a>
+                    <form ng-if="$index === ctrl.indexOfCreateFormToShow" ng-submit="ctrl.createUser()">
+                        <input type="text" ng-model="ctrl.username" />
+                        <input type="password" ng-model="ctrl.password" />
+                        <input type="submit" value="Create User">
+                    </form>
+                </div>
+            </div>
+
+            <div class="login">
+                <!-- Log In -->
+                <div class="lb">
+                    <a href="#" ng-click="(ctrl.indexOfLogFormToShow === $index) ? ctrl.indexOfLogFormToShow = null : ctrl.indexOfLogFormToShow = $index">Log In</a>
+                    <form ng-if="$index === ctrl.indexOfLogFormToShow" ng-submit="ctrl.logIn()">
+                        <input type="text" ng-model="ctrl.username" />
+                        <input type="password" ng-model="ctrl.password" />
+                        <!-- log in submit button - display welcom username -->
+                        <input type="submit" value="Log In" ng-click="ctrl.getSignedInUser()">
+                        <div ng-if="ctrl.loggedInUsername" class="welcome">
+                            Welcome, {{ ctrl.loggedInUsername }}
+                            <button>Logout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+
         <div class="watchlist">
-            <a href="/">Your Watchlist</a>
+            <div class="wl">
+                <button ng-click="ctrl.toggleInfo()">Your Watchlist</button>
+            </div>
         </div>
+
 
     <!-- Main Container -->
     <div class="container">
@@ -56,7 +63,7 @@
             <div class="search">
                 <form name="getMovies" ng-submit="ctrl.getMovies()">
                     <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
-                    <button type="submit">FIND MOVIES</button>
+                    <button type="submit">Search</button>
                 </form>
             </div>
         </div>
@@ -70,5 +77,14 @@
             <h4>Rating: {{ movie.Metascore }}</h4>
         </div>
     </div>
+
+    <!-- Movie show area -->
+    <div class="saved">
+        <form ng-submit="ctrl.getWatchlist()">
+            <h2>Add to watchlist</h2>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
 </body>
 </html>
