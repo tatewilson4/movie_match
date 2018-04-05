@@ -26,7 +26,7 @@ app.use('/users' , userController);
 const sessionController = require('./controllers/sessions.js');
 app.use('/sessions' , sessionController);
 
-app.get('/movies', function(req, res){
+app.get('/sessions', function(req, res){
     if(req.session.currentuser){
         res.json(req.session.currentuser);
     } else {

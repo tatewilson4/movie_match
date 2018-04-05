@@ -1,16 +1,54 @@
-body {
-    background-color: white;
+body * {
     font-family: 'Roboto', sans-serif;
+    font-weight: 400em;
 
 }
 
-.header {
+header {
     display: flex;
     position: relative;
     border: 2px solid black;
     margin: 20px;
+    padding: 10px;
+    align-items: center;
+    position: relative;
+}
+
+
+.welcome {
+    display: flex;
+    border: 2px solid black;
+}
+
+.watchlist {
+    display: flex;
+    margin: 20px;
+    text-align: center;
+}
+
+.create {
+    display: flex;
+    margin: 20px;
+    text-align: center;
+
 
 }
+
+.login {
+    display: flex;
+    margin: 20px;
+    text-align: center;
+
+}
+
+.saved {
+    display: flex;
+    border: 2px solid black;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 
 .search {
     display: flex;
@@ -46,18 +84,21 @@ body {
     border-left: 2px solid black;
 }
 
-.watchlist {
-    margin: 20px;
-    text-align: center;
-}
+.navBar {
+    display: flex;
+    border: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    flex-direction: row;
 
+}
 
 .container {
     display: flex;
+    align-items: center;
     flex-direction: column;
     border: 2px solid black;
     min-height: 100vh;
-    flex-wrap: wrap;
     margin: 20px;
 }
 
@@ -131,6 +172,7 @@ body {
     border: 2px solid black;
     border-right: 2px solid black;
     border-left: 2px solid black;
+    flex-direction: row;
 }
 
 .watchlist {
