@@ -5,8 +5,6 @@ app.controller('MainController',['$http', function($http) {
     this.indexOfLogFormToShow = null;
     this.indexOfCreateFormToShow = null;
 
-
-
     this.movies = [];
 
     this.baseURL = 'http://www.omdbapi.com/?';
@@ -15,11 +13,7 @@ app.controller('MainController',['$http', function($http) {
     this.movieTitle = '';
     this.searchURL = this.baseURL + this.apikey + '&' + this.query;
 
-    this.toggleInfo = () => {
-        this.showInfo = !this.showInfo;
-    }
-
-
+    console.log(this.movieTitle);
 
     // Get Movies
     this.getMovies = ()=>{
@@ -27,10 +21,8 @@ app.controller('MainController',['$http', function($http) {
             method: 'GET',
             url : this.searchURL + this.movieTitle
         }).then( response => {
-            // this.movies = [response.data]
-            this.movies.push(response.data);
+            this.movies = [response.data];
             console.log(response.data);
-            console.log(this.movies);
         }, error => {
             console.log(error);
         }).catch ( err => {
@@ -38,7 +30,6 @@ app.controller('MainController',['$http', function($http) {
         })
     }
 
-    //function to create user
     this.createUser = function(){
         $http({
             method:'POST',
@@ -53,7 +44,7 @@ app.controller('MainController',['$http', function($http) {
             console.log('error');
         });
     }
-    //function to log in
+
     this.logIn = function(){
         $http({
             method:'POST',
@@ -68,19 +59,18 @@ app.controller('MainController',['$http', function($http) {
             console.log('error');
         });
     }
-    //function to get the signed in user and display welcome
+
     this.getSignedInUser = function(){
         const controller = this;
         $http({
             method:'GET',
             url: '/sessions'
         }).then(function(response){
-            controller.loggedInUsername = response.data.username;
-            console.log(response);
+            controller.loggedInUsername =response.data.username;
+            console.log(response);;
         }, function(){
             console.log('error');
         });
     }
-    // this.getMovies();
-    // this.createMovies();
+
 }]);
