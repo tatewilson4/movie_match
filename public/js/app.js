@@ -60,13 +60,14 @@ app.controller('MainController',['$http', function($http) {
         });
     }
 
-    this.goApp = function(){
+    this.getSignedInUser = function(){
         const controller = this;
         $http({
-            method:'Get',
-            url: '/movies'
+            method:'GET',
+            url: '/sessions'
         }).then(function(response){
             controller.loggedInUsername =response.data.username;
+            console.log(response);;
         }, function(){
             console.log('error');
         });
