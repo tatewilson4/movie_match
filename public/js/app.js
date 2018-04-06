@@ -4,7 +4,7 @@ app.controller('MainController',['$http', function($http) {
     this.appName = "Movie Match";
     this.indexOfLogFormToShow = null;
     this.indexOfCreateFormToShow = null;
-
+    const controller = this;
     this.movies = [];
     this.watchList = [];
 
@@ -15,20 +15,32 @@ app.controller('MainController',['$http', function($http) {
     this.searchURL = this.baseURL + this.apikey + '&' + this.query;
 
     this.toggleInfo = () => {
-        this.showInfo = !this.showInfo;
+        this.showWatchList = !this.showWatchList;
     }
 
     // console.log(this.movieTitle);
 
 
-    //Get Watchlist
-    this.getWatchlist = () => {
+    //Create User Watchlist
+    this.createUserWatchlist = (user) => {
         $http({
             method: 'POST',
             url:'/movies',
             data: this.movies
         }).then(response => {
             this.watchList = response.data;
+            // this.watchList.push(response.data);
+            // this.getWatchlist();
+            $http({
+                method: 'PUT',
+                url: '/users/' + controller.savedData.username,
+                data: this.watchList
+            }).then(response => {
+                this.user_list = response.data
+                console.log(response);
+            }, error => {
+                console.log(error);
+            })
         }, error => {
             console.log(error);
         }).catch (err => {
@@ -36,16 +48,31 @@ app.controller('MainController',['$http', function($http) {
         })
     }
 
+
+    // this.showUserWatchlist = () => {
+    //     $http({
+    //         method: 'GET',
+    //         url: '/users/' + controller.savedData.username,
+    //         data: this.user_list
+    //     }).then(response => {
+    //         console.log(response);
+    //     }, error => {
+    //         console.log(error);
+    //     });
+    // };
+
+
     // Get Movies
     this.getMovies = ()=>{
         $http({
             method: 'GET',
             url : this.searchURL + this.movieTitle
         }).then( response => {
-            this.movies = [response.data];
-            // this.movies.push(response.data);
+            // this.movies = response.data;
+            this.movies.push(response.data);
             console.log(response.data);
             // console.log(this.movies);
+
         }, error => {
             console.log(error);
         }).catch ( err => {
@@ -53,14 +80,17 @@ app.controller('MainController',['$http', function($http) {
         })
     }
 
+
+
+
     // Create User
     this.createUser = function(){
         $http({
             method:'POST',
             url: '/users',
             data: {
-                username: this.username,
-                password: this.password
+                username: controller.username,
+                password: controller.password
             }
         }).then(function(response){
             console.log(response);
@@ -75,10 +105,13 @@ app.controller('MainController',['$http', function($http) {
             method:'POST',
             url: '/sessions',
             data: {
-                username: this.username,
-                password: this.password
+                username: controller.username,
+                password: controller.password
             }
         }).then(function(response){
+            // this.getSignedInUser();
+            controller.savedData = response.config.data
+            console.log(controller.savedData);
             console.log(response);
         }, function(){
             console.log('error');
@@ -93,6 +126,7 @@ app.controller('MainController',['$http', function($http) {
             url: '/sessions'
         }).then(function(response){
             controller.loggedInUsername = response.data.username;
+            controller.loggedInUser = response.data;
             console.log(response);
         }, function(){
             console.log('error');

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users.js');
+const Movie = require('../models/movies.js');
 const bcrypt = require('bcrypt');
 
 

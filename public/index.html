@@ -34,7 +34,7 @@
                         <input type="text" ng-model="ctrl.username" />
                         <input type="password" ng-model="ctrl.password" />
                         <!-- log in submit button - display welcom username -->
-                        <input type="submit" value="Log In" ng-click="ctrl.getSignedInUser()">
+                        <input type="submit" value="Log In">
                         <div ng-if="ctrl.loggedInUsername" class="welcome">
                             Welcome, {{ ctrl.loggedInUsername }}
                             <button>Logout</button>
@@ -44,47 +44,56 @@
             </div>
         </header>
 
+
+
         <div class="watchlist">
             <div class="wl">
-                <button ng-click="ctrl.toggleInfo()">Your Watchlist</button>
+                <button ng-click="ctrl.showUserWatchList()">Your Watchlist</button>
+                <div ng-repeat="watch in ctrl.watchList" class="watchList">
+                    <h2>{{ watch.Title }} {{ watch.Year }}</h2>
+                    <img id="poster" ng-src="{{ watch.Poster }}" alt"{{ watch.Name }}">
+                    <h2>Starring: {{ watch.Actors }}</h2>
+                    <h3>Genre: {{ watch.Genre }}</h3>
+                    <h4>Rating: {{ watch.Metascore }}</h4>
+                </div>
             </div>
         </div>
 
 
-    <!-- Main Container -->
-    <div class="container">
-        <div class="box1">
-            <h3>FIND SOMETHING TO WATCH:</h3>
-            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-        </div>
+        <!-- Main Container -->
+        <div class="container">
+            <div class="box1">
+                <h3>FIND SOMETHING TO WATCH:</h3>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+            </div>
 
-    <!-- Search Form -->
-        <div class="main">
-            <div class="search">
-                <form name="getMovies" ng-submit="ctrl.getMovies()">
-                    <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
-                    <button type="submit">Search</button>
-                </form>
+            <!-- Search Form -->
+            <div class="main">
+                <div class="search">
+                    <form name="getMovies" ng-submit="ctrl.getMovies()">
+                        <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Movie show area -->
+            <div ng-repeat="movie in ctrl.movies" class="movies">
+                <h2>{{ movie.Title }} {{ movie.Year }}</h2>
+                <img id="poster" ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
+                <h2>Starring: {{ movie.Actors }}</h2>
+                <h3>Genre: {{ movie.Genre }}</h3>
+                <h4>Rating: {{ movie.Metascore }}</h4>
             </div>
         </div>
 
-    <!-- Movie show area -->
-        <div ng-repeat="movie in ctrl.movies" class="movies">
-            <h2>{{ movie.Title }} {{ movie.Year }}</h2>
-            <img id="poster" ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
-            <h2>Starring: {{ movie.Actors }}</h2>
-            <h3>Genre: {{ movie.Genre }}</h3>
-            <h4>Rating: {{ movie.Metascore }}</h4>
+        <!-- Movie show area -->
+        <div class="saved">
+            <form ng-submit="ctrl.createUserWatchlist()">
+                <h2>Add to watchlist</h2>
+                <input type="submit" value="Submit">
+            </form>
         </div>
-    </div>
 
-    <!-- Movie show area -->
-    <div class="saved">
-        <form ng-submit="ctrl.getWatchlist()">
-            <h2>Add to watchlist</h2>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
-</body>
-</html>
+    </body>
+    </html>
