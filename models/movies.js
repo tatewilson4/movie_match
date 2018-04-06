@@ -6,7 +6,7 @@ const movieSchema = new mongoose.Schema({
     Poster: String,
     Actors: String,
     Genre: String,
-    Metascore: String
+    Metascore: Number
 });
 
 const Movies =  mongoose.model('Movie', movieSchema);
