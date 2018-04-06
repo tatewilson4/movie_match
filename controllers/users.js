@@ -22,7 +22,7 @@ router.put('/:username' , (req, res) => {
 });
 
 router.get('/:username' , (req, res) => {
-    User.find({}, (err, foundUsers) => {
+    User.find({username: req.params.username}, (err, foundUsers) => {
         res.json(foundUsers);
     });
 });
