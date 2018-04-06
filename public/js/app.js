@@ -7,6 +7,7 @@ app.controller('MainController',['$http', function($http) {
     const controller = this;
     this.movies = [];
     this.watchList = [];
+    this.getUserWatchlist = [];
 
     this.baseURL = 'http://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
@@ -36,7 +37,7 @@ app.controller('MainController',['$http', function($http) {
                 url: '/users/' + controller.savedData.username,
                 data: this.watchList
             }).then(response => {
-                this.user_list = response.data
+                this.user_list = response.data;
                 console.log(response);
             }, error => {
                 console.log(error);
@@ -49,17 +50,17 @@ app.controller('MainController',['$http', function($http) {
     }
 
 
-    // this.showUserWatchlist = () => {
-    //     $http({
-    //         method: 'GET',
-    //         url: '/users/' + controller.savedData.username,
-    //         data: this.user_list
-    //     }).then(response => {
-    //         console.log(response);
-    //     }, error => {
-    //         console.log(error);
-    //     });
-    // };
+    this.showUserWatchlist = () => {
+        $http({
+            method: 'GET',
+            url: '/users/' + controller.savedData.username
+        }).then(response => {
+            this.getUserWatchlist = response.data;
+            console.log(response.data);
+        }, error => {
+            console.log(error);
+        });
+    };
 
 
     // Get Movies
@@ -132,7 +133,7 @@ app.controller('MainController',['$http', function($http) {
             console.log('error');
         });
     }
-
+    // this.showUserWatchlist();
     // this.getWatchlist();
 
 }]);
