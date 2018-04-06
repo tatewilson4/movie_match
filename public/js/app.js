@@ -55,7 +55,7 @@ app.controller('MainController',['$http', function($http) {
             method: 'GET',
             url: '/users/' + controller.savedData.username
         }).then(response => {
-            this.getUserWatchlist = response.data;
+            controller.getUserWatchlist.push(response.data);
             console.log(response.data);
         }, error => {
             console.log(error);

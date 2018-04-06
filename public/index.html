@@ -44,24 +44,10 @@
             </div>
         </header>
 
-
-
-        <!-- <div class="watchlist">
-            <div class="wl">
-                <button ng-click="ctrl.showUserWatchList()">Your Watchlist</button>
-                <div ng-repeat="watch in ctrl.watchList" class="watchList">
-                    <h2>{{ watch.Title }} {{ watch.Year }}</h2>
-                    <img id="poster" ng-src="{{ watch.Poster }}" alt"{{ watch.Name }}">
-                    <h2>Starring: {{ watch.Actors }}</h2>
-                    <h3>Genre: {{ watch.Genre }}</h3>
-                    <h4>Rating: {{ watch.Metascore }}</h4>
-                </div>
-            </div>
-        </div> -->
         <div class="userWatch">
             <div class="showWatchlist">
                 <form name="getUserWatchlist" ng-submit="ctrl.showUserWatchlist()">
-                    <button type="submit">Your Watchlist</button>
+                    <button type="submit">YOUR WATCHLIST</button>
                 </form>
             </div>
         </div>
@@ -73,8 +59,7 @@
             <h3>Genre: {{ watch.Genre }}</h3>
             <h4>Rating: {{ watch.Metascore }}</h4>
         </div>
-
-
+        
         <!-- Main Container -->
         <div class="container">
             <div class="box1">
