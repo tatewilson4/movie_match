@@ -4,10 +4,14 @@ app.controller('MainController',['$http', function($http) {
     this.appName = "Movie Match";
     this.indexOfLogFormToShow = null;
     this.indexOfCreateFormToShow = null;
+    this.indexOfLogoutFormToShow = null;
+    this.showInfo = false;
+
     const controller = this;
     this.movies = [];
     this.watchList = [];
-    this.getUserWatchlist = [];
+    this.getUserWatchlists = [];
+    this.logout = ''
 
     this.baseURL = 'http://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
@@ -16,8 +20,26 @@ app.controller('MainController',['$http', function($http) {
     this.searchURL = this.baseURL + this.apikey + '&' + this.query;
 
     this.toggleInfo = () => {
-        this.showWatchList = !this.showWatchList;
+        this.showInfo = !this.showInfo;
+        console.log(this.showInfo);
     }
+
+
+
+        //function to get the signed in user and display welcome
+        this.getSignedInUser = function(){
+            const controller = this;
+            $http({
+                method:'GET',
+                url: '/sessions'
+            }).then(function(response){
+                controller.loggedInUsername = response.data.username;
+                controller.loggedInUser = response.data;
+                console.log(response);
+            }, function(){
+                console.log('error');
+            });
+        }
 
     // console.log(this.movieTitle);
 
@@ -29,7 +51,7 @@ app.controller('MainController',['$http', function($http) {
             url:'/movies',
             data: this.movies
         }).then(response => {
-            this.watchList = response.data;
+            this.watchList.push(response.data);
             // this.watchList.push(response.data);
             // this.getWatchlist();
             $http({
@@ -50,40 +72,6 @@ app.controller('MainController',['$http', function($http) {
     }
 
 
-    this.showUserWatchlist = () => {
-        $http({
-            method: 'GET',
-            url: '/users/' + controller.savedData.username
-        }).then(response => {
-            controller.getUserWatchlist.push(response.data);
-            console.log(response.data);
-        }, error => {
-            console.log(error);
-        });
-    };
-
-
-    // Get Movies
-    this.getMovies = ()=>{
-        $http({
-            method: 'GET',
-            url : this.searchURL + this.movieTitle
-        }).then( response => {
-            // this.movies = response.data;
-            this.movies.push(response.data);
-            console.log(response.data);
-            // console.log(this.movies);
-
-        }, error => {
-            console.log(error);
-        }).catch ( err => {
-            console.log('Catch:' , err);
-        })
-    }
-
-
-
-
     // Create User
     this.createUser = function(){
         $http({
@@ -100,6 +88,42 @@ app.controller('MainController',['$http', function($http) {
         });
     }
 
+
+    // Get Movies
+    this.getMovies = ()=>{
+        $http({
+            method: 'GET',
+            url : this.searchURL + this.movieTitle
+        }).then( response => {
+            // this.movies = response.data;
+            this.movies.push(response.data);
+
+            console.log(response.data);
+
+            // console.log(this.movies);
+
+        }, error => {
+            console.log(error);
+        }).catch ( err => {
+            console.log('Catch:' , err);
+        })
+    }
+
+    //shows logged in users watchlist
+    this.showUserWatchlist = () => {
+        $http({
+            method: 'GET',
+            url: '/users/' + controller.savedData.username
+        }).then(response => {
+            controller.getUserWatchlist = response.data;
+            controller.getUserWatchlists = this.getUserWatchlist[0];
+            console.log(response.data);
+        }, error => {
+            console.log(error);
+        });
+    };
+
+
     // Login
     this.logIn = function(){
         $http({
@@ -111,7 +135,8 @@ app.controller('MainController',['$http', function($http) {
             }
         }).then(function(response){
             // this.getSignedInUser();
-            controller.savedData = response.config.data
+            controller.savedData = response.config.data;
+            this.loggedInUsername = this.username;
             console.log(controller.savedData);
             console.log(response);
         }, function(){
@@ -119,20 +144,19 @@ app.controller('MainController',['$http', function($http) {
         });
     }
 
-    //function to get the signed in user and display welcome
-    this.getSignedInUser = function(){
-        const controller = this;
+
+    this.logOut = function(){
         $http({
-            method:'GET',
-            url: '/sessions'
+            method: 'DELETE',
+            url: '/sessions',
         }).then(function(response){
-            controller.loggedInUsername = response.data.username;
-            controller.loggedInUser = response.data;
+            this.logout = response.data
             console.log(response);
         }, function(){
             console.log('error');
         });
     }
+
     // this.showUserWatchlist();
     // this.getWatchlist();
 
