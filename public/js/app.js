@@ -16,7 +16,7 @@ app.controller('MainController',['$http', function($http) {
     this.getUserWatchlists = [];
     this.logout = ''
 
-    this.baseURL = 'http://www.omdbapi.com/?';
+    this.baseURL = 'https://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
     this.query = 't=';
     this.movieTitle = '';
