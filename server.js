@@ -50,6 +50,7 @@ console.log('---------------------------------');
 console.log('Server running on port: ' + port);
 console.log('---------------------------------');
 
+
 // mongoose.connect('mongodb://localhost:27017/movies');
 // mongoose.connection.once('open', ()=>{
 //     console.log('connected to mongo');
