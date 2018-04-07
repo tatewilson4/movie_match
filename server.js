@@ -43,7 +43,7 @@ app.get('/sessions', function(req, res){
 
 const User = require('./models/users.js');
 const mongoUri =  process.env.MONGODB_URI || 'mongodb://localhost:27017/movies';
- mongoose.connect(mongoUri);
+mongoose.connect(mongoUri);
 const port = process.env.PORT || 3000;
 app.listen(port);
 console.log('---------------------------------');
