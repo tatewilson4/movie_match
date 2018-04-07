@@ -8,6 +8,7 @@ router.get('/' , (req, res) => {
     });
 });
 
+
 router.post('/' , (req, res) => {
     Movie.create(req.body, (err, createdMovie) => {
         res.json(createdMovie);
