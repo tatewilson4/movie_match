@@ -40,7 +40,7 @@ app.get('/sessions', function(req, res){
     }
 });
 
-//for heroku and localhost
+
 const User = require('./models/users.js');
 const mongoUri =  process.env.MONGODB_URI || 'mongodb://localhost:27017/movies';
  mongoose.connect(mongoUri);
