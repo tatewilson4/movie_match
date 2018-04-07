@@ -5,11 +5,14 @@ app.controller('MainController',['$http', function($http) {
     this.indexOfLogFormToShow = null;
     this.indexOfCreateFormToShow = null;
     this.indexOfLogoutFormToShow = null;
+    this.indexOfEditFormToShow = null;
     this.showInfo = false;
 
     const controller = this;
+    this.guests = [];
     this.movies = [];
     this.watchList = [];
+    this.user_list = [];
     this.getUserWatchlists = [];
     this.logout = ''
 
@@ -88,6 +91,41 @@ app.controller('MainController',['$http', function($http) {
         });
     }
 
+    //create movie for community board
+    this.createComMovie = function(){
+        $http({
+            method: 'POST',
+            url: '/guests',
+            data: {
+                title: this.title,
+                year: this.year,
+                poster: this.poster,
+                actors: this.actors,
+                genre: this.genre,
+                metascore: this.metascore,
+                comments: this.comments
+            }
+        }).then( response => {
+            this.getComMovies();
+            console.log(response.data);
+        }, error => {
+            console.log(error);
+        });
+    }
+
+    //get movies for community board
+    this.getComMovies = function(){
+        $http({
+            method: 'GET',
+            url: '/guests'
+        }).then( response => {
+            this.guests = response.data
+            console.log(response.data);
+        }, error => {
+            console.log(error);
+        });
+    }
+
 
     // Get Movies
     this.getMovies = ()=>{
@@ -115,8 +153,8 @@ app.controller('MainController',['$http', function($http) {
             method: 'GET',
             url: '/users/' + controller.savedData.username
         }).then(response => {
-            controller.getUserWatchlist = response.data;
-            controller.getUserWatchlists = this.getUserWatchlist[0];
+            this.getUserWatchlist = response.data;
+            this.getUserWatchlists = this.getUserWatchlist[0];
             console.log(response.data);
         }, error => {
             console.log(error);
@@ -143,8 +181,40 @@ app.controller('MainController',['$http', function($http) {
             console.log('error');
         });
     }
+    //edit community guest board post
+    this.editMovie = function(guest){
+        $http({
+            method: 'PUT',
+            url: 'guests/' + guest._id,
+            data: {
+                title: this.updatedTitle,
+                year: this.updatedYear,
+                poster: this.updatedPoster,
+                actors: this.updatedActors,
+                genre: this.updatedGenre,
+                metascore: this.updatedMetascore,
+                comments: this.updatedComments
+            }
+        }).then( response => {
+            this.getComMovies();
+        }, error => {
+            console.log(error);
+        });
+    }
 
+    //delete community board movie
+    this.deleteComMovie = function(guest){
+        $http({
+            method: 'DELETE',
+            url: '/guests/' + guest._id
+        }).then( response => {
+            this.getComMovies();
+        }, error => {
+            console.log(error);
+        });
+    }
 
+    //logout function
     this.logOut = function(){
         $http({
             method: 'DELETE',
@@ -156,7 +226,7 @@ app.controller('MainController',['$http', function($http) {
             console.log('error');
         });
     }
-
+    this.getComMovies();
     // this.showUserWatchlist();
     // this.getWatchlist();
 
