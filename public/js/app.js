@@ -29,18 +29,18 @@ app.controller('MainController',['$http', function($http) {
 
 
 
-        //function to get the signed in user and display welcome
-        this.checkLoggedIn = function(){
-            $http({
-                method: 'GET',
-                url: '/app'
-            }).then( response => {
-                this.loggedInUsername = response.data.username;
-                console.log(response);
-            }, function(){
-                console.log('error');
-            });
-        }
+    //function to get the signed in user and display welcome
+    this.checkLoggedIn = function(){
+        $http({
+            method: 'GET',
+            url: '/app'
+        }).then( response => {
+            this.loggedInUsername = response.data.username;
+            console.log(response);
+        }, error => {
+            console.log(error);
+        });
+    }
 
     // console.log(this.movieTitle);
 
@@ -82,10 +82,30 @@ app.controller('MainController',['$http', function($http) {
                 username: this.username,
                 password: this.password
             }
-        }).then(function(response){
+        }).then( response => {
             console.log(response);
-        }, function(){
-            console.log('error');
+        }, error => {
+            console.log(error);
+        });
+    }
+
+    // Login
+    this.logIn = function(){
+        $http({
+            method:'POST',
+            url: '/sessions',
+            data: {
+                username: this.username,
+                password: this.password
+            }
+        }).then( response => {
+            // this.getSignedInUser();
+            this.savedData = response.config.data;
+            this.loggedInUsernames = this.username;
+            console.log(controller.savedData);
+            console.log(response);
+        }, error => {
+            console.log(error);
         });
     }
 
@@ -142,7 +162,7 @@ app.controller('MainController',['$http', function($http) {
             console.log(error);
         }).catch ( err => {
             console.log('Catch:' , err);
-        })
+        });
     }
 
     //shows logged in users watchlist
@@ -156,29 +176,9 @@ app.controller('MainController',['$http', function($http) {
             console.log(response.data);
         }, error => {
             console.log(error);
-        });
+        }).catch ( err => console.error('Catch: ', err))
     };
 
-
-    // Login
-    this.logIn = function(){
-        $http({
-            method:'POST',
-            url: '/sessions',
-            data: {
-                username: this.username,
-                password: this.password
-            }
-        }).then(function(response){
-            // this.getSignedInUser();
-            controller.savedData = response.config.data;
-            this.loggedInUsername = this.username;
-            console.log(controller.savedData);
-            console.log(response);
-        }, function(){
-            console.log('error');
-        });
-    }
     //edit community guest board post
     this.editMovie = function(guest){
         $http({
@@ -218,7 +218,8 @@ app.controller('MainController',['$http', function($http) {
             method: 'DELETE',
             url: '/sessions',
         }).then( response => {
-            this.logOut = response.data
+            this.loggedInUsername = "";
+            this.toggleInfo();
             console.log(response);
         }, error => {
             console.log(error);
