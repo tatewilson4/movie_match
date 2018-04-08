@@ -60,13 +60,15 @@
         </div>
 
         <!-- display user watchlist -->
-        <div ng-repeat="watch in ctrl.getUserWatchlists" class="showUserWatchlist">
+        <div ng-repeat="watch in ctrl.getUserWatchlists.user_list" class="showUserWatchlist" >
             <dl>
-                <dt>{{ watch.Title }} {{ watch.Year }}</dt>
-                <dd><img id="poster" ng-src="{{ watch.Poster }}" alt"{{ watch.Name }}"></dd>
-                <dd>Starring: {{ watch.Actors }}</dd>
-                <dd>Genre: {{ watch.Genre }}</dd>
-                <dd>Rating: {{ watch.Metascore }}</dd>
+                <dt>{{ watch[0].Title }} {{ watch[0].Year }}</dt>
+                <dd><img id="poster" ng-src="{{ watch[0].Poster }}" alt"{{ watch[0].Name }}"></dd>
+                <dd>Starring: {{ watch[0].Actors }}</dd>
+                <dd>Genre: {{ watch[0].Genre }}</dd>
+                <dd>Rating: {{ watch[0].Metascore }}</dd>
+                <dd>Test</dd>
+                <dd>{{ watch[0].Title }}</dd>
             </dl>
         </div>
 
@@ -97,7 +99,7 @@
             </form>
         </div>
 
-        <!-- Movie show area -->
+        <!-- Add to user watchList -->
         <div class="saved">
             <form ng-submit="ctrl.createUserWatchlist()">
                 <h2>Add to watchlist</h2>
