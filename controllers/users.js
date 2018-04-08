@@ -22,7 +22,7 @@ router.post('/', function(req, res){
 });
 
 router.put('/:username' , (req, res) => {
-    User.findOneAndUpdate({username: req.params.username}, {user_list: req.body}, {new:true}, (err, updatedUser) => {
+    User.findOneAndUpdate({username: req.params.username}, {$push: {user_list: req.body}}, {new:true}, (err, updatedUser) => {
         res.json(updatedUser);
     });
 });

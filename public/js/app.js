@@ -153,8 +153,8 @@ app.controller('MainController',['$http', function($http) {
                 url : this.searchURL + this.movieTitle
             }).then( response => {
                 // this.movies = response.data;
+                this.movies = [];
                 this.movies.push(response.data);
-
                 console.log(response.data);
 
                 // console.log(this.movies);
