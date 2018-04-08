@@ -14,10 +14,28 @@
         <a id="navbar-logo" href="/">
             <img src="logo1.png" alt="MovieMatch"></a>
             <!-- Navbar -->
+            <!-- toggles info for users who are not logged in -->
             <div class="create">
-                <div class="cb">
+                <div ng-if="!ctrl.loggedInUsername">
+                    <button ng-click="ctrl.toggleInfo()">CREATE NEW ACCOUNT/LOGIN</button>
+                </div>
+                <div class="cb" ng-show="ctrl.showInfo" ng-if="!ctrl.loggedInUsername">
+
+                    <div class="login">
+                        <!-- Log In -->
+                        <div class="lb">
+                            <a href="#" ng-click="(ctrl.indexOfLogFormToShow === $index) ? ctrl.indexOfLogFormToShow = null : ctrl.indexOfLogFormToShow = $index">LOGIN</a>
+                            <form ng-if="$index === ctrl.indexOfLogFormToShow" ng-submit="ctrl.logIn()">
+                                <input type="text" ng-model="ctrl.username" />
+                                <input type="password" ng-model="ctrl.password" />
+                                <!-- log in submit button - display welcom username -->
+                                <input type="submit" value="Log In" ng-click="ctrl.checkLoggedIn()">
+                            </div>
+                        </form>
+                    </div>
+
                     <!-- Create User -->
-                    <a href="#" ng-click="(ctrl.indexOfCreateFormToShow === $index) ? ctrl.indexOfCreateFormToShow = null : ctrl.indexOfCreateFormToShow = $index">Create New User</a>
+                    <a href="#" ng-click="(ctrl.indexOfCreateFormToShow === $index) ? ctrl.indexOfCreateFormToShow = null : ctrl.indexOfCreateFormToShow = $index">CREATE NEW ACCOUNT</a>
                     <form ng-if="$index === ctrl.indexOfCreateFormToShow" ng-submit="ctrl.createUser()">
                         <input type="text" ng-model="ctrl.username" />
                         <input type="password" ng-model="ctrl.password" />
@@ -25,128 +43,106 @@
                     </form>
                 </div>
             </div>
+            <!-- welcom message when user is logged in -->
+            <div ng-if="ctrl.loggedInUsername">
+                Welcome, {{ ctrl.loggedInUsername }}
+            <button ng-if="ctrl.loggedInUsername" ng-click='ctrl.logOut()'>Logout</button>
+            </div>
 
-            <div class="login">
-                <!-- Log In -->
-                <div class="lb">
-                    <a href="#" ng-click="(ctrl.indexOfLogFormToShow === $index) ? ctrl.indexOfLogFormToShow = null : ctrl.indexOfLogFormToShow = $index">Log In</a>
-                    <form ng-if="$index === ctrl.indexOfLogFormToShow" ng-submit="ctrl.logIn()">
-                        <input type="text" ng-model="ctrl.username" />
-                        <input type="password" ng-model="ctrl.password" />
-                        <!-- log in submit button - display welcom username -->
-                        <input type="submit" value="Log In">
-                        <!-- <div ng-if="ctrl.getSignedInUser()" class="welcome">
-                        Welcome, {{ ctrl.loggedInUsername }}
-                        <button>Logout</button>
-                    </div> -->
+        </header>
+        <!-- activated user watchList on click -->
+        <div class="userWatch">
+            <div class="showWatchlist">
+                <form name="getUserWatchlist" ng-submit="ctrl.showUserWatchlist()">
+                    <button type="submit">YOUR WATCHLIST</button>
                 </form>
             </div>
         </div>
 
-        <!-- logout buton toggle and function -->
-        <div class="logout">
-            <div class="logO">
-                <a href="#" ng-click="(ctrl.indexOfLogoutFormToShow === $index) ? ctrl.indexOfLogoutFormToShow = null : ctrl.indexOfLogoutFormToShow = $index">Log Out</a>
-                <form ng-if="$index === ctrl.indexOfLogoutFormToShow" ng-submit="ctrl.logOut()">
-                    <button>Logout</button>
-                </form>
-            </div>
+        <!-- display user watchlist -->
+        <div ng-repeat="watch in ctrl.getUserWatchlists" class="showUserWatchlist">
+            <dl>
+                <dt>{{ watch.Title }} {{ watch.Year }}</dt>
+                <dd><img id="poster" ng-src="{{ watch.Poster }}" alt"{{ watch.Name }}"></dd>
+                <dd>Starring: {{ watch.Actors }}</dd>
+                <dd>Genre: {{ watch.Genre }}</dd>
+                <dd>Rating: {{ watch.Metascore }}</dd>
+            </dl>
         </div>
 
-    </header>
-    <!-- activated user watchList on click -->
-    <div class="userWatch">
-        <div class="showWatchlist">
-            <form name="getUserWatchlist" ng-submit="ctrl.showUserWatchlist()">
-                <button type="submit">YOUR WATCHLIST</button>
+        <!-- Main Container -->
+        <div class="container">
+            <div class="box1">
+                <h3>FIND SOMETHING TO WATCH:</h3>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+            </div>
+
+            <!-- Search Form -->
+            <div class="main">
+                <div class="search">
+                    <form name="getMovies" ng-submit="ctrl.getMovies()">
+                        <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Movie show area -->
+            <form ng-repeat="movie in ctrl.movies" class="movies">
+                <h2>{{ movie.Title }} {{ movie.Year }}</h2>
+                <img id="poster" ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
+                <h2>Starring: {{ movie.Actors }}</h2>
+                <h3>Genre: {{ movie.Genre }}</h3>
+                <h4>Rating: {{ movie.Metascore }}</h4>
             </form>
-        </div>
-    </div>
-
-    <!-- display user watchlist -->
-    <div ng-repeat="watch in ctrl.getUserWatchlists" class="showUserWatchlist">
-        <dl>
-            <dt>{{ watch.Title }} {{ watch.Year }}</dt>
-            <dd><img id="poster" ng-src="{{ watch.Poster }}" alt"{{ watch.Name }}"></dd>
-            <dd>Starring: {{ watch.Actors }}</dd>
-            <dd>Genre: {{ watch.Genre }}</dd>
-            <dd>Rating: {{ watch.Metascore }}</dd>
-        </dl>
-    </div>
-
-    <!-- Main Container -->
-    <div class="container">
-        <div class="box1">
-            <h3>FIND SOMETHING TO WATCH:</h3>
-            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-        </div>
-
-        <!-- Search Form -->
-        <div class="main">
-            <div class="search">
-                <form name="getMovies" ng-submit="ctrl.getMovies()">
-                    <input type="text" placeholder="movie title" ng-model="ctrl.movieTitle">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
         </div>
 
         <!-- Movie show area -->
-        <form ng-repeat="movie in ctrl.movies" class="movies">
-            <h2>{{ movie.Title }} {{ movie.Year }}</h2>
-            <img id="poster" ng-src="{{ movie.Poster }}" alt"{{ movie.Name }}">
-            <h2>Starring: {{ movie.Actors }}</h2>
-            <h3>Genre: {{ movie.Genre }}</h3>
-            <h4>Rating: {{ movie.Metascore }}</h4>
-        </form>
-    </div>
-
-    <!-- Movie show area -->
-    <div class="saved">
-        <form ng-submit="ctrl.createUserWatchlist()">
-            <h2>Add to watchlist</h2>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
-    <!-- input field for community board -->
-    <div class="guestPost">
-        <form ng-submit="ctrl.createComMovie()">
-            <input type="text" ng-model="ctrl.title" placeholder="title">
-            <input type="text" ng-model="ctrl.year" placeholder="year">
-            <input type="text" ng-model="ctrl.poster" placeholder="image">
-            <input type="text" ng-model="ctrl.actors" placeholder="actors">
-            <input type="text" ng-model="ctrl.genre" placeholder="genre">
-            <input type="text" ng-model="ctrl.metascore" placeholder="rating 0/100">
-            <input type="text" ng-model="ctrl.comments" placeholder="additional comments">
-            <input type="submit" value="ADD">
-        </form>
-
-        <!-- display list for community board -->
-        <ul>
-            <li
-            ng-repeat="guest in ctrl.guests">
-            {{ guest.title }}
-            {{ guest.year }}
-            <img id="comPoster" ng-src="{{ guest.poster }}" alt"{{ movie.title }}">
-            {{ guest.actors }}
-            {{ guest.genre }}
-            {{ guest.metascore }}
-            {{ guest.comments }}
-            <button ng-click="ctrl.deleteComMovie(guest)">Delete This Movie</button>
-            <a href="#" ng-click="(ctrl.indexOfEditFormToShow === $index) ? ctrl.indexOfEditFormToShow = null : ctrl.indexOfEditFormToShow = $index">Edit This Movie</a>
-            <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editMovie(guest)">
-                <input type="text" ng-model="ctrl.updatedTitle" placeholder="title">
-                <input type="text" ng-model="ctrl.updatedYear" placeholder="year">
-                <input type="text" ng-model="ctrl.updatedPoster" placeholder="image">
-                <input type="text" ng-model="ctrl.updatedActors" placeholder="actors">
-                <input type="text" ng-model="ctrl.updatedGenre" placeholder="genre">
-                <input type="text" ng-model="ctrl.updatedMetascore" placeholder="rating 0/100">
-                <input type="text" ng-model="ctrl.updatedComments" placeholder="additional comments">
-                <input type="submit" value="UPDATE MOVIE">
+        <div class="saved">
+            <form ng-submit="ctrl.createUserWatchlist()">
+                <h2>Add to watchlist</h2>
+                <input type="submit" value="Submit">
             </form>
-        </li>
-    </ul>
-</div>
+        </div>
+
+        <!-- input field for community board -->
+        <div class="guestPost">
+            <form ng-submit="ctrl.createComMovie()">
+                <input type="text" ng-model="ctrl.title" placeholder="title">
+                <input type="text" ng-model="ctrl.year" placeholder="year">
+                <input type="text" ng-model="ctrl.poster" placeholder="image">
+                <input type="text" ng-model="ctrl.actors" placeholder="actors">
+                <input type="text" ng-model="ctrl.genre" placeholder="genre">
+                <input type="text" ng-model="ctrl.metascore" placeholder="rating 0/100">
+                <input type="text" ng-model="ctrl.comments" placeholder="additional comments">
+                <input type="submit" value="ADD">
+            </form>
+
+            <!-- display list for community board -->
+            <ul>
+                <li
+                ng-repeat="guest in ctrl.guests">
+                {{ guest.title }}
+                {{ guest.year }}
+                <img id="comPoster" ng-src="{{ guest.poster }}" alt"{{ movie.title }}">
+                {{ guest.actors }}
+                {{ guest.genre }}
+                {{ guest.metascore }}
+                {{ guest.comments }}
+                <button ng-click="ctrl.deleteComMovie(guest)">Delete This Movie</button>
+                <a href="#" ng-click="(ctrl.indexOfEditFormToShow === $index) ? ctrl.indexOfEditFormToShow = null : ctrl.indexOfEditFormToShow = $index">Edit This Movie</a>
+                <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editMovie(guest)">
+                    <input type="text" ng-model="ctrl.updatedTitle" placeholder="title">
+                    <input type="text" ng-model="ctrl.updatedYear" placeholder="year">
+                    <input type="text" ng-model="ctrl.updatedPoster" placeholder="image">
+                    <input type="text" ng-model="ctrl.updatedActors" placeholder="actors">
+                    <input type="text" ng-model="ctrl.updatedGenre" placeholder="genre">
+                    <input type="text" ng-model="ctrl.updatedMetascore" placeholder="rating 0/100">
+                    <input type="text" ng-model="ctrl.updatedComments" placeholder="additional comments">
+                    <input type="submit" value="UPDATE MOVIE">
+                </form>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
