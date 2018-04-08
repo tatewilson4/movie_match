@@ -14,7 +14,7 @@ app.controller('MainController',['$http', function($http) {
     this.watchList = [];
     this.user_list = [];
     this.getUserWatchlists = [];
-    this.logout = ''
+    this.logout = '';
 
     this.baseURL = 'https://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
@@ -30,14 +30,12 @@ app.controller('MainController',['$http', function($http) {
 
 
         //function to get the signed in user and display welcome
-        this.getSignedInUser = function(){
-            const controller = this;
+        this.checkLoggedIn = function(){
             $http({
-                method:'GET',
-                url: '/sessions'
-            }).then(function(response){
-                controller.loggedInUsername = response.data.username;
-                controller.loggedInUser = response.data;
+                method: 'GET',
+                url: '/app'
+            }).then( response => {
+                this.loggedInUsername = response.data.username;
                 console.log(response);
             }, function(){
                 console.log('error');
@@ -81,8 +79,8 @@ app.controller('MainController',['$http', function($http) {
             method:'POST',
             url: '/users',
             data: {
-                username: controller.username,
-                password: controller.password
+                username: this.username,
+                password: this.password
             }
         }).then(function(response){
             console.log(response);
@@ -168,8 +166,8 @@ app.controller('MainController',['$http', function($http) {
             method:'POST',
             url: '/sessions',
             data: {
-                username: controller.username,
-                password: controller.password
+                username: this.username,
+                password: this.password
             }
         }).then(function(response){
             // this.getSignedInUser();
@@ -219,11 +217,11 @@ app.controller('MainController',['$http', function($http) {
         $http({
             method: 'DELETE',
             url: '/sessions',
-        }).then(function(response){
-            this.logout = response.data
+        }).then( response => {
+            this.logOut = response.data
             console.log(response);
-        }, function(){
-            console.log('error');
+        }, error => {
+            console.log(error);
         });
     }
     this.getComMovies();

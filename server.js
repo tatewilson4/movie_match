@@ -29,7 +29,7 @@ app.use('/sessions' , sessionController);
 const guestsController = require('./controllers/guests.js');
 app.use('/guests' , guestsController);
 
-app.get('/sessions', function(req, res){
+app.get('/app', function(req, res){
     if(req.session.currentuser){
         res.json(req.session.currentuser);
     } else {
