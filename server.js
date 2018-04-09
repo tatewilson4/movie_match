@@ -29,7 +29,7 @@ app.use('/sessions' , sessionController);
 const guestsController = require('./controllers/guests.js');
 app.use('/guests' , guestsController);
 
-app.get('/sessions', function(req, res){
+app.get('/app', function(req, res){
     if(req.session.currentuser){
         res.json(req.session.currentuser);
     } else {
@@ -43,7 +43,7 @@ app.get('/sessions', function(req, res){
 
 const User = require('./models/users.js');
 const mongoUri =  process.env.MONGODB_URI || 'mongodb://localhost:27017/movies';
- mongoose.connect(mongoUri);
+mongoose.connect(mongoUri);
 const port = process.env.PORT || 3000;
 app.listen(port);
 console.log('---------------------------------');

@@ -5,11 +5,11 @@ const Movie = require('../models/movies.js');
 const bcrypt = require('bcrypt');
 
 router.get('/:username' , (req, res) => {
-    User.find({username: req.params.username}, (err, foundUsers) => {
-        res.json(foundUsers);
+    User.find({}, (err, foundUser) => {
+        res.json(foundUser);
     });
 });
-
+//hello
 
 router.post('/', function(req, res){
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -22,7 +22,7 @@ router.post('/', function(req, res){
 });
 
 router.put('/:username' , (req, res) => {
-    User.findOneAndUpdate({username: req.params.username}, {user_list: req.body}, {new:true}, (err, updatedUser) => {
+    User.findOneAndUpdate({username: req.params.username}, {$push: {user_list: req.body}}, {new:true}, (err, updatedUser) => {
         res.json(updatedUser);
     });
 });

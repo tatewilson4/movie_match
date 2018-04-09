@@ -14,7 +14,7 @@ app.controller('MainController',['$http', function($http) {
     this.watchList = [];
     this.user_list = [];
     this.getUserWatchlists = [];
-    this.logout = ''
+    this.logout = '';
 
     this.baseURL = 'https://www.omdbapi.com/?';
     this.apikey = 'apikey=' + 'd7e24dcc';
@@ -29,20 +29,18 @@ app.controller('MainController',['$http', function($http) {
 
 
 
-        //function to get the signed in user and display welcome
-        this.getSignedInUser = function(){
-            const controller = this;
-            $http({
-                method:'GET',
-                url: '/sessions'
-            }).then(function(response){
-                controller.loggedInUsername = response.data.username;
-                controller.loggedInUser = response.data;
-                console.log(response);
-            }, function(){
-                console.log('error');
-            });
-        }
+    //function to get the signed in user and display welcome
+    this.checkLoggedIn = function(){
+        $http({
+            method: 'GET',
+            url: '/app'
+        }).then( response => {
+            this.loggedInUsername = response.data.username;
+            console.log(response);
+        }, error => {
+            console.log(error);
+        });
+    }
 
     // console.log(this.movieTitle);
 
@@ -57,177 +55,183 @@ app.controller('MainController',['$http', function($http) {
             this.watchList.push(response.data);
             // this.watchList.push(response.data);
             // this.getWatchlist();
+                console.log(this.watchList);
+                $http({
+                    method: 'PUT',
+                    url: '/users/' + controller.savedData.username,
+                    data: this.watchList
+                }).then(response => {
+                    this.user_list.push(response.data);
+                    console.log(response);
+                }, error => {
+                    console.log(error);
+                })
+            }, error => {
+                console.log(error);
+            }).catch (err => {
+                console.log('Catch: ', err);
+            })
+        }
+
+
+        // Create User
+        this.createUser = function(){
             $http({
-                method: 'PUT',
-                url: '/users/' + controller.savedData.username,
-                data: this.watchList
-            }).then(response => {
-                this.user_list = response.data;
+                method:'POST',
+                url: '/users',
+                data: {
+                    username: this.username,
+                    password: this.password
+                }
+            }).then( response => {
                 console.log(response);
             }, error => {
                 console.log(error);
-            })
-        }, error => {
-            console.log(error);
-        }).catch (err => {
-            console.log('Catch: ', err);
-        })
-    }
+            });
+        }
+
+        // Login
+        this.logIn = function(){
+            $http({
+                method:'POST',
+                url: '/sessions',
+                data: {
+                    username: this.username,
+                    password: this.password
+                }
+            }).then( response => {
+                // this.getSignedInUser();
+                this.savedData = response.config.data;
+                this.loggedInUsernames = this.username;
+                console.log(controller.savedData);
+                console.log(response);
+            }, error => {
+                console.log(error);
+            });
+        }
+
+        //create movie for community board
+        this.createComMovie = function(){
+            $http({
+                method: 'POST',
+                url: '/guests',
+                data: {
+                    title: this.title,
+                    year: this.year,
+                    poster: this.poster,
+                    actors: this.actors,
+                    genre: this.genre,
+                    metascore: this.metascore,
+                    comments: this.comments
+                }
+            }).then( response => {
+                this.getComMovies();
+                console.log(response.data);
+            }, error => {
+                console.log(error);
+            });
+        }
+
+        //get movies for community board
+        this.getComMovies = function(){
+            $http({
+                method: 'GET',
+                url: '/guests'
+            }).then( response => {
+                this.guests = response.data
+                console.log(response.data);
+            }, error => {
+                console.log(error);
+            });
+        }
 
 
-    // Create User
-    this.createUser = function(){
-        $http({
-            method:'POST',
-            url: '/users',
-            data: {
-                username: controller.username,
-                password: controller.password
-            }
-        }).then(function(response){
-            console.log(response);
-        }, function(){
-            console.log('error');
-        });
-    }
+        // Get Movies
+        this.getMovies = ()=>{
+            $http({
+                method: 'GET',
+                url : this.searchURL + this.movieTitle
+            }).then( response => {
+                // this.movies = response.data;
+                this.movies = [];
+                this.movies.push(response.data);
+                console.log(response.data);
 
-    //create movie for community board
-    this.createComMovie = function(){
-        $http({
-            method: 'POST',
-            url: '/guests',
-            data: {
-                title: this.title,
-                year: this.year,
-                poster: this.poster,
-                actors: this.actors,
-                genre: this.genre,
-                metascore: this.metascore,
-                comments: this.comments
-            }
-        }).then( response => {
-            this.getComMovies();
-            console.log(response.data);
-        }, error => {
-            console.log(error);
-        });
-    }
+                // console.log(this.movies);
 
-    //get movies for community board
-    this.getComMovies = function(){
-        $http({
-            method: 'GET',
-            url: '/guests'
-        }).then( response => {
-            this.guests = response.data
-            console.log(response.data);
-        }, error => {
-            console.log(error);
-        });
-    }
+            }, error => {
+                console.log(error);
+            }).catch ( err => {
+                console.log('Catch:' , err);
+            });
+        }
 
+        //shows logged in users watchlist
+        this.showUserWatchlist = () => {
+            $http({
+                method: 'GET',
+                url: '/users/' + controller.savedData.username
+            }).then(response => {
+                this.getUserWatchlist = response.data;
+                this.getUserWatchlists = this.getUserWatchlist[0];
+                console.log(this.getUserWatchlists);
+            }, error => {
+                console.log(error);
+            }).catch ( err => console.error('Catch: ', err))
+        };
 
-    // Get Movies
-    this.getMovies = ()=>{
-        $http({
-            method: 'GET',
-            url : this.searchURL + this.movieTitle
-        }).then( response => {
-            // this.movies = response.data;
-            this.movies.push(response.data);
+        this.logStuff = (stuff) => {
+            console.log(stuff);
+        }
 
-            console.log(response.data);
+        //edit community guest board post
+        this.editMovie = function(guest){
+            $http({
+                method: 'PUT',
+                url: '/guests/' + guest._id,
+                data: {
+                    title: this.updatedTitle,
+                    year: this.updatedYear,
+                    poster: this.updatedPoster,
+                    actors: this.updatedActors,
+                    genre: this.updatedGenre,
+                    metascore: this.updatedMetascore,
+                    comments: this.updatedComments
+                }
+            }).then( response => {
+                this.getComMovies();
+            }, error => {
+                console.log(error);
+            });
+        }
 
-            // console.log(this.movies);
+        //delete community board movie
+        this.deleteComMovie = function(guest){
+            $http({
+                method: 'DELETE',
+                url: '/guests/' + guest._id
+            }).then( response => {
+                this.getComMovies();
+            }, error => {
+                console.log(error);
+            });
+        }
 
-        }, error => {
-            console.log(error);
-        }).catch ( err => {
-            console.log('Catch:' , err);
-        })
-    }
+        //logout function
+        this.logOut = function(){
+            $http({
+                method: 'DELETE',
+                url: '/sessions',
+            }).then( response => {
+                this.loggedInUsername = "";
+                this.toggleInfo();
+                console.log(response);
+            }, error => {
+                console.log(error);
+            });
+        }
+        this.getComMovies();
+        // this.showUserWatchlist();
+        // this.getWatchlist();
 
-    //shows logged in users watchlist
-    this.showUserWatchlist = () => {
-        $http({
-            method: 'GET',
-            url: '/users/' + controller.savedData.username
-        }).then(response => {
-            this.getUserWatchlist = response.data;
-            this.getUserWatchlists = this.getUserWatchlist[0];
-            console.log(response.data);
-        }, error => {
-            console.log(error);
-        });
-    };
-
-
-    // Login
-    this.logIn = function(){
-        $http({
-            method:'POST',
-            url: '/sessions',
-            data: {
-                username: controller.username,
-                password: controller.password
-            }
-        }).then(function(response){
-            // this.getSignedInUser();
-            controller.savedData = response.config.data;
-            this.loggedInUsername = this.username;
-            console.log(controller.savedData);
-            console.log(response);
-        }, function(){
-            console.log('error');
-        });
-    }
-    //edit community guest board post
-    this.editMovie = function(guest){
-        $http({
-            method: 'PUT',
-            url: 'guests/' + guest._id,
-            data: {
-                title: this.updatedTitle,
-                year: this.updatedYear,
-                poster: this.updatedPoster,
-                actors: this.updatedActors,
-                genre: this.updatedGenre,
-                metascore: this.updatedMetascore,
-                comments: this.updatedComments
-            }
-        }).then( response => {
-            this.getComMovies();
-        }, error => {
-            console.log(error);
-        });
-    }
-
-    //delete community board movie
-    this.deleteComMovie = function(guest){
-        $http({
-            method: 'DELETE',
-            url: '/guests/' + guest._id
-        }).then( response => {
-            this.getComMovies();
-        }, error => {
-            console.log(error);
-        });
-    }
-
-    //logout function
-    this.logOut = function(){
-        $http({
-            method: 'DELETE',
-            url: '/sessions',
-        }).then(function(response){
-            this.logout = response.data
-            console.log(response);
-        }, function(){
-            console.log('error');
-        });
-    }
-    this.getComMovies();
-    // this.showUserWatchlist();
-    // this.getWatchlist();
-
-}]);
+    }]);
