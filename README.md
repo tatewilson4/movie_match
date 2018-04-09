@@ -6,7 +6,7 @@
 
 ---
 #### Project Link
-[Movie Match]: mac-sauce.herokuapp.com
+<https://mac-sauce.herokuapp.com/>
 ---
 
 ### About
