@@ -7,9 +7,16 @@
     margin-right: 100px;
 }
 
-#watchlist {
-
+.showUserWatchlist {
+    text-align: center;
 }
+
+.com {
+    display: grid;
+    text-align: center;
+    padding-left: 50%;
+}
+
 
 .nav-link {
     margin-right: 5px; !important;

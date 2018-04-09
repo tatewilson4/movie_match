@@ -9,7 +9,7 @@ router.get('/:username' , (req, res) => {
         res.json(foundUser);
     });
 });
-
+//hello
 
 router.post('/', function(req, res){
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
