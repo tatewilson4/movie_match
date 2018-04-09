@@ -53,8 +53,6 @@ app.controller('MainController',['$http', function($http) {
             data: this.movies
         }).then(response => {
             this.watchList.push(response.data);
-            // this.watchList.push(response.data);
-            // this.getWatchlist();
                 console.log(this.watchList);
                 $http({
                     method: 'PUT',
@@ -100,7 +98,6 @@ app.controller('MainController',['$http', function($http) {
                     password: this.password
                 }
             }).then( response => {
-                // this.getSignedInUser();
                 this.savedData = response.config.data;
                 this.loggedInUsernames = this.username;
                 console.log(controller.savedData);
@@ -152,7 +149,6 @@ app.controller('MainController',['$http', function($http) {
                 method: 'GET',
                 url : this.searchURL + this.movieTitle
             }).then( response => {
-                // this.movies = response.data;
                 this.movies = [];
                 this.movies.push(response.data);
                 console.log(response.data);
@@ -231,7 +227,6 @@ app.controller('MainController',['$http', function($http) {
             });
         }
         this.getComMovies();
-        // this.showUserWatchlist();
-        // this.getWatchlist();
+
 
     }]);

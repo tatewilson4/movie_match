@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-blue">
             <a class="navbar-brand" href="/"><img src="logomm.png"  alt="MovieMatch"></a>
             <div class="login">
-                <div ng-if="!ctrl.loggedInUsername">
+                <div ng-class="initBut" ng-if="!ctrl.loggedInUsername">
                     <button ng-click="ctrl.toggleInfo()">CREATE NEW ACCOUNT/LOGIN</button>
                 </div>
                 <div class="cb" ng-show="ctrl.showInfo" ng-if="!ctrl.loggedInUsername">
@@ -140,7 +140,7 @@
                 <div class="outCom">
                     <li
                     ng-repeat="guest in ctrl.guests" class="com">
-                    {{ guest.title }}
+                    {{ guest.title }}<br/>
                     {{ guest.year }}</br>
                     <img id="comPoster" ng-src="{{ guest.poster }}" alt"{{ movie.title }}"></br>
                     {{ guest.actors }}</br>
