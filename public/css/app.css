@@ -1,17 +1,55 @@
-body * {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400em;
+.navbar {
+    margin-bottom: 0px; !important;
 
 }
 
-header {
-    display: flex;
-    position: relative;
-    border: 2px solid black;
-    margin: 20px;
-    padding: 10px;
-    align-items: center;
-    position: relative;
+.form {
+    margin-right: 100px;
+}
+
+#watchlist {
+
+}
+
+.nav-link {
+    margin-right: 5px; !important;
+    color: #ffffff;
+}
+
+.btn {
+    margin-top: 3px;
+    color: red;
+    background-color: white;
+
+}
+
+.btn-sm {
+    margin-top: 3px;
+    margin-right: 25px;
+}
+
+.container-fluid {
+    background-color: #0A1016;
+    height: 100%;
+    min-height: 100vh;
+    color: #9D9FA2;
+}
+
+.jumbotron {
+    background-color: #0A1016;
+    color: #FFFFFF;
+    height: 100%;
+    min-height: 100vh;
+}
+
+p {
+    color: #9D9FA2;
+}
+
+.navbar-brand {
+    padding-right: 10px;
+    padding-left: 10px;
+
 }
 
 
@@ -26,21 +64,6 @@ header {
     text-align: center;
 }
 
-.create {
-    display: flex;
-    margin: 20px;
-    text-align: center;
-
-
-}
-
-.login {
-    display: flex;
-    margin: 20px;
-    text-align: center;
-
-}
-
 .saved {
     display: flex;
     border: 2px solid black;
@@ -52,11 +75,15 @@ header {
 
 .search {
     display: flex;
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    border: 2px solid black;
     flex-wrap: wrap;
+}
+
+#searchTitle{
+    padding-right: 10px;
 }
 
 .movies {
@@ -68,63 +95,22 @@ header {
 }
 
 #poster {
-    display: flex;
+    /* display: flex; */
     margin-left: auto;
     margin-right: auto;
-    max-height: 500px;
-    max-width: 300px;
-    min-width: 300px;
-    min-height: 500px;
+    max-height: 300px;
+    max-width: 170px;
+    min-width: 170px;
+    min-height: 300px;
 }
 
-#navbar-logo {
-    display: flex;
-    border: 2px solid black;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-}
-
-.navBar {
-    display: flex;
-    border: 2px solid black;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-    flex-direction: row;
-
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border: 2px solid black;
-    min-height: 100vh;
-    margin: 20px;
-}
-
-img {
-    max-height: 60px;
-    max-width: 180px;
-    min-width: 180px;
-    min-height: 60px;
-    padding: 10px;
-}
-
-.main {
-    display: flex;
-    flex-direction: row;
-    border: 2px solid black;
-    text-align: center;
-    margin: 20px;
-    flex-wrap: wrap;
-}
-
-.box1 {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    text-align: center;
-    margin: 20px;
+#comPoster {
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 300px;
+    max-width: 170px;
+    min-width: 170px;
+    min-height: 300px;
 }
 
 body {
@@ -133,84 +119,11 @@ body {
 
 }
 
-.header {
-    display: flex;
-    position: relative;
-    border: 2px solid black;
-    margin: 20px;
-}
-
-.search {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    border: 2px solid black;
-    flex-wrap: wrap;
-}
-
-.movies {
-    display: flex;
-    border: 2px solid black;
-    text-align: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-#poster {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 500px;
-    max-width: 300px;
-    min-width: 300px;
-    min-height: 500px;
-}
-
-#navbar-logo {
-    display: flex;
-    border: 2px solid black;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-    flex-direction: row;
-}
-
-.watchlist {
-    margin: 20px;
-    text-align: center;
-}
-
-
-.container {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    min-height: 100vh;
-    flex-wrap: wrap;
-    margin: 20px;
-}
-
 img {
-    max-height: 60px;
-    max-width: 180px;
-    min-width: 180px;
-    min-height: 60px;
+    max-height: 70px;
+    max-width: 210px;
+    min-width: 210px;
+    min-height: 70px;
     padding: 10px;
-}
-
-.main {
-    display: flex;
-    flex-direction: row;
-    border: 2px solid black;
-    text-align: center;
-    margin: 20px;
-    flex-wrap: wrap;
-}
-
-.box1 {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    text-align: center;
-    margin: 20px;
+    margin-left: -40px;
 }
