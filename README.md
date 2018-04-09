@@ -26,11 +26,11 @@ Future Upgrades - We would like to get the roulette board up and running. We wou
 HTML  
 CSS  
 JS
-Bootstrap
-MongoDB
-Express
-AngularJS
-Node.js
+BOOTSTRAP
+MONGODB
+EXPRESS
+ANGULARJS
+NODE.JS
 
 ---
 
