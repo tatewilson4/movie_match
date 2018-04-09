@@ -188,7 +188,7 @@ app.controller('MainController',['$http', function($http) {
         this.editMovie = function(guest){
             $http({
                 method: 'PUT',
-                url: 'guests/' + guest._id,
+                url: '/guests/' + guest._id,
                 data: {
                     title: this.updatedTitle,
                     year: this.updatedYear,
