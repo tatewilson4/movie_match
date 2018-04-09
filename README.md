@@ -23,14 +23,14 @@ We used Node.js, Mongoose, Express, Angular and OMDBAPI. This app had the MVC fi
 Future Upgrades - We would like to get the roulette board up and running. We would also like for there to be a chat room option. In this chat room users could talk about different movies on the spot and get a good reccomendation. 
 
 ### Tech Used
-HTML  
-CSS  
-JS
-BOOTSTRAP
-MONGODB
-EXPRESS
-ANGULARJS
-NODE.JS
+*HTML  
+*CSS  
+*JS
+*BOOTSTRAP
+*MONGODB
+*EXPRESS
+*ANGULARJS
+*NODE.JS
 
 ---
 
