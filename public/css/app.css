@@ -12,9 +12,8 @@
 }
 
 .com {
-    display: grid;
     text-align: center;
-    padding-left: 50%;
+    display: inline-table;
 }
 
 
